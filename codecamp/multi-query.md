@@ -2,7 +2,7 @@
 ![alt text](multi-query.png)
 ## Multi Query
 
-This code demonstrates a pipeline for retrieving and processing documents to answer user questions effectively using LangChain and related tools. The pipeline uses multi-query generation to enhance document retrieval from a vector database and a retrieval-augmented generation (RAG) approach for answering questions.
+This code demonstrates a pipeline for retrieving and processing documents to answer user questions effectively using LangChain and related tools. The pipeline uses multi-query generation to enhance document retrieval from a vector database and a retrieval-augmented generation (RAG) approach for answering questions. The question is rephrased and the appropriate document chunks are joined by a distinct Union that is fed into the ollama llm.
 
 ## Code Description
 
