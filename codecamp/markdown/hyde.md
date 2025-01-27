@@ -1,5 +1,5 @@
 # Explanation: HyDE Document Generation and Retrieval-Augmented Generation (RAG)
-
+![alt text](hyde.png)
 This document explains the provided code, which demonstrates **HyDE document generation**, **retrieval** of context, and the use of **retrieval-augmented generation (RAG)** for answering a given question.
 
 ---
