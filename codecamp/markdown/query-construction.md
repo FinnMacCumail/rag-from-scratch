@@ -1,0 +1,1 @@
+![alt text](query-construction.png)
