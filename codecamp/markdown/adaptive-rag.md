@@ -20,6 +20,7 @@ Vectorstore Creation: These chunks are stored in a Chroma vectorstore named "rag
 The code configures an LLM (ChatOllama) for various tasks including routing, generation, and grading.
 ### 3. Routing Component
 A question router uses a prompt template to decide whether to use the vectorstore or perform a web search based on the user's question, returning either 'web_earch' or 'vectorstore'.
+
 - **JsonOutputParser**: Converts the model's output into a JSON format. It helps extract structured data (in this case, a key called datasource).
 ```python
 prompt = PromptTemplate(
@@ -51,7 +52,7 @@ doc_txt = docs[1].page_content
 
 The model returns the result in a JSON format with the key 'datasource', which will indicate whether the answer should come from 'web_search' or 'vectorstore'.
 
-4. Retrieval and Grading
+### 4. Retrieval and Grading
 This **Retrieval Grader** system that evaluates the relevance of a retrieved document based on a user’s question. It uses a language model (LLM) to determine whether the document contains relevant information for the given question and provides a binary "yes" or "no" score indicating the relevance.
 **Retrieval**: Retrieves documents from the vectorstore relevant to the user’s question.
 **Relevance Grader**: Assesses if retrieved documents are relevant, filtering out irrelevant ones.
@@ -95,9 +96,9 @@ print(retrieval_grader.invoke({"question": question, "document": doc_txt}))
 - The grader uses the language model to assess whether the document is relevant to the question.
 - The model returns a binary score ("yes" or "no") in JSON format.
 
-5. Answer Generation (RAG Chain)
+### 5. Answer Generation (RAG Chain)
 Uses a prompt pulled from HuggingFace Hub with ChatOllama to generate answers based on the context of retrieved documents.
-6. Quality Control Components
+### 6. Quality Control Components
 1. **Hallucination Grader**: Checks if generated answers are grounded in provided documents.
 The Hallucination Grader code is designed to assess whether a given generation (answer) from a language model is grounded in or supported by a provided set of facts (documents). This helps detect and filter out hallucinated answers, where the model provides incorrect or fabricated information not supported by the input facts.
 ```python
@@ -133,7 +134,7 @@ For example:
 After routing, it proceeds to either web search or document retrieval.
 If documents are deemed irrelevant, the query is transformed for re-retrieval.
 Generated answers undergo checks for hallucinations and usefulness, determining if further action (like re-generating) is needed.
-1. ### GraphState: 
+### 7. GraphState: 
 This class defines the state of the graph in a typed format using TypedDict.
 
     - TypedDict is used here to specify that the dictionary will have a fixed set of keys with specific types for each key.
@@ -142,7 +143,7 @@ This class defines the state of the graph in a typed format using TypedDict.
         - generation: A string representing the generated answer from a language model (LLM).
         - documents: A list of strings, where each string represents a document or a relevant piece of information related to the question and answer generation.
 **TypedDict** enforces specific types for its keys
-2. ### Nodes
+### 8. Nodes
 These are functions that perform specific tasks in the workflow.
 
 1. **retrieve(state)**:
@@ -166,7 +167,7 @@ These are functions that perform specific tasks in the workflow.
 -Performs a web search using the transformed query.
 -Aggregates the results into a single document and returns it along with the refined question.
 
-### Edges
+ ### 9. Edges
 These functions determine the flow of data through the graph based on certain conditions or evaluations.
 
 1. **route_question(state)**:
@@ -202,7 +203,7 @@ workflow.add_conditional_edges(
 **other conditional edges**:
 - The transformation step feeds back into retrieval, allowing iterative refinement.
 - After generating an answer, grade_termination checks if the answer is useful. If not, it loops back for further processing; if useful, the process ends.
-10. Execution
+### 10. Execution
 The application is compiled from the workflow graph and run with a sample question: "What is the AlphaCodium paper about?"
 Results are streamed and printed, showing intermediate steps and the final answer.
 Key Features:
