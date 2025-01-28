@@ -28,7 +28,7 @@ prompt_hyde = ChatPromptTemplate.from_template(template)
 This template guides the model to generate a scientific passage that addresses the input question. The generated passage simulates an excerpt from a scientific paper.
 ## 1. HyDE Chain
 ```python
-from langchain_openai import ChatOpenAI
+
 from langchain_core.output_parsers import StrOutputParser
 
 generate_docs_for_retrieval = (
@@ -38,7 +38,7 @@ generate_docs_for_retrieval = (
 )
 ```
 - prompt_hyde: Uses the HyDE template to structure the input prompt.
-- llm: Processes the prompt using a language model (e.g., ChatOpenAI).
+- llm: Processes the prompt using a language model (e.g., ChatOllama).
 - StrOutputParser: Converts the output from the language model into a usable string format.
 
 ### Execution
